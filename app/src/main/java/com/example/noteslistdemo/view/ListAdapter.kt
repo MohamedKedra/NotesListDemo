@@ -2,6 +2,8 @@ package com.example.noteslistdemo.view
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -9,12 +11,18 @@ import com.bumptech.glide.Glide
 import com.example.noteslistdemo.databinding.ItemNoteLayoutBinding
 import com.example.noteslistdemo.remote.ItemResult
 
-class ListAdapter(private val context: Context) : Adapter<ListAdapter.ListHolder>() {
+class ListAdapter(private val context: Context, val onItemClick: (ItemResult) -> Unit) :
+    Adapter<ListAdapter.ListHolder>() {
 
     private var results = ArrayList<ItemResult>()
 
     inner class ListHolder(private val itemNoteLayoutBinding: ItemNoteLayoutBinding) :
-        ViewHolder(itemNoteLayoutBinding.root) {
+        ViewHolder(itemNoteLayoutBinding.root), OnClickListener {
+
+        init {
+            itemView.setOnClickListener(this)
+        }
+
         fun bind(result: ItemResult) {
             with(itemNoteLayoutBinding) {
                 result.apply {
@@ -26,6 +34,10 @@ class ListAdapter(private val context: Context) : Adapter<ListAdapter.ListHolder
                     Glide.with(context).load(image_urls[0]).into(ivPic)
                 }
             }
+        }
+
+        override fun onClick(p0: View?) {
+            onItemClick.invoke(results[adapterPosition])
         }
     }
 

@@ -7,9 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.noteslistdemo.R
 import com.example.noteslistdemo.databinding.FragmentFirstBinding
 import com.example.noteslistdemo.remote.ItemResult
+import com.example.noteslistdemo.utils.Constant
 import com.example.noteslistdemo.utils.DataState
 import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.loading_notes_layout.*
@@ -21,7 +23,6 @@ class ListFragment : Fragment() {
 
     private val listViewModel by viewModels<ListViewModel>()
     lateinit var adapter: ListAdapter
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +36,12 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ListAdapter(requireContext())
+        adapter = ListAdapter(requireContext()) {
+
+            val bundle = Bundle()
+            bundle.putParcelable(Constant.item, it)
+            findNavController().navigate(R.id.action_ListFragment_to_DetailsFragment)
+        }
         initObserver()
     }
 

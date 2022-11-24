@@ -2,6 +2,7 @@ package com.example.noteslistdemo.di
 
 import android.content.Context
 import com.example.noteslistdemo.remote.NoteService
+import com.example.noteslistdemo.repository.NotesRepository
 import com.example.noteslistdemo.utils.ConnectionManager
 import com.example.noteslistdemo.utils.Constant
 import dagger.Module
@@ -27,6 +28,10 @@ class NotesModule {
     @Singleton
     @Provides
     fun provideService(retrofit: Retrofit) = retrofit.create(NoteService::class.java)
+
+    @Singleton
+    @Provides
+    fun provideRepository(noteService: NoteService) = NotesRepository(noteService)
 
     @Singleton
     @Provides
