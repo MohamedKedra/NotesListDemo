@@ -6,5 +6,5 @@ import retrofit2.http.GET
 interface NoteService {
 
     @GET("/default/dynamodb-writer")
-    fun getAllNotes(): Response<NotesResponse>
+    suspend fun getAllNotes(): Response<NotesResponse>
 }

@@ -1,6 +1,8 @@
 package com.example.noteslistdemo.view
 
 import android.content.Context
+import android.graphics.drawable.Drawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
@@ -8,6 +10,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.RequestOptions
+import com.example.noteslistdemo.R
 import com.example.noteslistdemo.databinding.ItemNoteLayoutBinding
 import com.example.noteslistdemo.remote.ItemResult
 
@@ -31,7 +38,33 @@ class ListAdapter(private val context: Context, val onItemClick: (ItemResult) ->
                     val dateTime = created_at.split(" ")
                     tvDate.text = dateTime[0]
                     tvTime.text = dateTime[1].substring(0, 4)
-                    Glide.with(context).load(image_urls[0]).into(ivPic)
+                    Glide.with(context).load(image_urls[0])
+                        .apply(
+                            RequestOptions()
+                                .placeholder(androidx.appcompat.R.drawable.abc_ab_share_pack_mtrl_alpha)
+                                .error(R.drawable.ic_launcher_background)
+                        )
+                        .listener(object : RequestListener<Drawable> {
+                            override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                Log.d("aa", "===${e}")
+                                return false
+                            }
+
+                            override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: com.bumptech.glide.request.target.Target<Drawable>?,
+                                dataSource: DataSource?,
+                                isFirstResource: Boolean
+                            ): Boolean {
+                                return false
+                            }
+                        }).into(ivPic)
                 }
             }
         }
