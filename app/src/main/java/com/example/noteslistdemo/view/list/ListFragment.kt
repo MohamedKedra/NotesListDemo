@@ -48,6 +48,7 @@ class ListFragment : Fragment() {
 
             findNavController().navigate(R.id.action_ListFragment_to_DetailsFragment, bundle)
         }
+
         initObserver()
     }
 
