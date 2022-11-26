@@ -1,4 +1,4 @@
-package com.example.noteslistdemo.view
+package com.example.noteslistdemo.view.list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -41,8 +41,12 @@ class ListFragment : Fragment() {
         adapter = ListAdapter(requireContext()) {
 
             val bundle = Bundle()
-            bundle.putParcelable(Constant.item, it)
-            findNavController().navigate(R.id.action_ListFragment_to_DetailsFragment)
+            bundle.putString(Constant.name, it.name)
+            bundle.putString(Constant.price, it.price)
+            bundle.putString(Constant.dateTime, it.created_at)
+            bundle.putString(Constant.image, it.image_urls[0])
+
+            findNavController().navigate(R.id.action_ListFragment_to_DetailsFragment, bundle)
         }
         initObserver()
     }

@@ -1,4 +1,4 @@
-package com.example.noteslistdemo.view
+package com.example.noteslistdemo.view.list
 
 import androidx.lifecycle.viewModelScope
 import com.example.noteslistdemo.remote.NotesResponse

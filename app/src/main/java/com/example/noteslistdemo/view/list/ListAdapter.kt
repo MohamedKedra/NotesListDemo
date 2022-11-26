@@ -1,4 +1,4 @@
-package com.example.noteslistdemo.view
+package com.example.noteslistdemo.view.list
 
 import android.content.Context
 import android.graphics.drawable.Drawable
@@ -37,7 +37,7 @@ class ListAdapter(private val context: Context, val onItemClick: (ItemResult) ->
                     tvPrice.text = price
                     val dateTime = created_at.split(" ")
                     tvDate.text = dateTime[0]
-                    tvTime.text = dateTime[1].substring(0, 4)
+                    tvTime.text = dateTime[1].substring(0, 5)
                     Glide.with(context).load(image_urls[0])
                         .apply(
                             RequestOptions()
