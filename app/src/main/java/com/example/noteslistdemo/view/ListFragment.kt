@@ -13,9 +13,11 @@ import com.example.noteslistdemo.databinding.FragmentFirstBinding
 import com.example.noteslistdemo.remote.ItemResult
 import com.example.noteslistdemo.utils.Constant
 import com.example.noteslistdemo.utils.DataState
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_first.*
 import kotlinx.android.synthetic.main.loading_notes_layout.*
 
+@AndroidEntryPoint
 class ListFragment : Fragment() {
 
     private var _binding: FragmentFirstBinding? = null
