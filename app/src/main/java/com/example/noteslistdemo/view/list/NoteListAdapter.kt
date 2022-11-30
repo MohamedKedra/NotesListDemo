@@ -7,6 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.bumptech.glide.Glide
@@ -18,12 +21,10 @@ import com.example.noteslistdemo.R
 import com.example.noteslistdemo.databinding.ItemNoteLayoutBinding
 import com.example.noteslistdemo.remote.ItemResult
 
-class ListAdapter(private val context: Context, val onItemClick: (ItemResult) -> Unit) :
-    Adapter<ListAdapter.ListHolder>() {
+class NoteListAdapter(private val context: Context, val onItemClick: (ItemResult) -> Unit) :
+    ListAdapter<ItemResult, NoteListAdapter.NoteHolder>(ItemResultDiffCallback()) {
 
-    private var results = ArrayList<ItemResult>()
-
-    inner class ListHolder(private val itemNoteLayoutBinding: ItemNoteLayoutBinding) :
+    inner class NoteHolder(private val itemNoteLayoutBinding: ItemNoteLayoutBinding) :
         ViewHolder(itemNoteLayoutBinding.root), OnClickListener {
 
         init {
@@ -70,21 +71,27 @@ class ListAdapter(private val context: Context, val onItemClick: (ItemResult) ->
         }
 
         override fun onClick(p0: View?) {
-            onItemClick.invoke(results[adapterPosition])
+            onItemClick.invoke(getItem(adapterPosition))
         }
     }
 
-    fun addItems(results: ArrayList<ItemResult>) {
-        this.results = results
-    }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteHolder {
         val view = ItemNoteLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ListHolder(view)
+        return NoteHolder(view)
     }
 
-    override fun onBindViewHolder(holder: ListHolder, position: Int) =
-        holder.bind(results[position])
+    override fun onBindViewHolder(holder: NoteHolder, position: Int) =
+        holder.bind(getItem(position))
 
-    override fun getItemCount(): Int = results.size
+}
+
+class ItemResultDiffCallback : DiffUtil.ItemCallback<ItemResult>() {
+    override fun areItemsTheSame(oldItem: ItemResult, newItem: ItemResult): Boolean {
+        return oldItem.uid == newItem.uid
+    }
+
+    override fun areContentsTheSame(oldItem: ItemResult, newItem: ItemResult): Boolean {
+        return areItemsTheSame(oldItem, newItem)
+    }
 }

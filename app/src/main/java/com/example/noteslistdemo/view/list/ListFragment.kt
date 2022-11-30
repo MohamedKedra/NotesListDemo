@@ -11,7 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.example.noteslistdemo.R
 import com.example.noteslistdemo.databinding.FragmentFirstBinding
 import com.example.noteslistdemo.remote.ItemResult
-import com.example.noteslistdemo.utils.Constant
 import com.example.noteslistdemo.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_first.*
@@ -24,13 +23,12 @@ class ListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val listViewModel by viewModels<ListViewModel>()
-    lateinit var adapter: ListAdapter
+    lateinit var adapter: NoteListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentFirstBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -38,7 +36,7 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        adapter = ListAdapter(requireContext()) {
+        adapter = NoteListAdapter(requireContext()) {
             val action = ListFragmentDirections.actionListFragmentToDetailsFragment(it)
             findNavController().navigate(action)
         }
@@ -57,7 +55,7 @@ class ListFragment : Fragment() {
                 }
                 DataState.DataStatus.SUCCESS -> {
                     showHideLoading()
-                    adapter.addItems(it.getData()?.results as ArrayList<ItemResult>)
+                    adapter.submitList(it.getData()?.results as ArrayList<ItemResult>)
                     rv_notes.adapter = adapter
                 }
                 DataState.DataStatus.ERROR -> {
