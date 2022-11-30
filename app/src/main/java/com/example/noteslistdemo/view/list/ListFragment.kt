@@ -39,14 +39,8 @@ class ListFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         adapter = ListAdapter(requireContext()) {
-
-            val bundle = Bundle()
-            bundle.putString(Constant.name, it.name)
-            bundle.putString(Constant.price, it.price)
-            bundle.putString(Constant.dateTime, it.created_at)
-            bundle.putString(Constant.image, it.image_urls[0])
-
-            findNavController().navigate(R.id.action_ListFragment_to_DetailsFragment, bundle)
+            val action = ListFragmentDirections.actionListFragmentToDetailsFragment(it)
+            findNavController().navigate(action)
         }
 
         initObserver()

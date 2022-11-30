@@ -8,18 +8,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.RequiresApi
-import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.bumptech.glide.GlideBuilder
 import com.bumptech.glide.load.DataSource
 import com.bumptech.glide.load.engine.GlideException
 import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.example.noteslistdemo.R
 import com.example.noteslistdemo.databinding.FragmentSecondBinding
-import com.example.noteslistdemo.remote.ItemResult
-import com.example.noteslistdemo.utils.Constant
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -29,6 +25,8 @@ class DetailsFragment : Fragment() {
 
     private val binding get() = _binding!!
 
+    private val args : DetailsFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,22 +34,20 @@ class DetailsFragment : Fragment() {
 
         _binding = FragmentSecondBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
-    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         with(binding){
 
-            arguments?.apply {
-                tvName.text = getString(Constant.name)
-                tvPrice.text = getString(Constant.price)
-                val dateTime = getString(Constant.dateTime)?.split(" ")
-                tvDate.text = dateTime?.get(0)
-                tvTime.text = dateTime?.get(1)?.substring(0, 5)
-                Glide.with(requireContext()).load(getString(Constant.image))
+            args.item?.apply {
+                tvName.text = name
+                tvPrice.text = price
+                val dateTime = created_at.split(" ")
+                tvDate.text = dateTime[0]
+                tvTime.text = dateTime[1].substring(0, 5)
+                Glide.with(requireContext()).load(image_urls[0])
                     .apply(
                         RequestOptions()
                             .placeholder(androidx.appcompat.R.drawable.abc_ab_share_pack_mtrl_alpha)
