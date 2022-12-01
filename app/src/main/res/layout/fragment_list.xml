@@ -18,40 +18,40 @@
             tools:listitem="@layout/item_note_layout" />
 
 
-        <RelativeLayout
-            android:orientation="vertical"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_gravity="center"
                 android:orientation="vertical">
 
-                <TextView
-                    android:layout_gravity="center"
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_error"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center" />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_retry"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/retry"
                     android:layout_gravity="center"
                     android:layout_marginVertical="@dimen/margin_16"
-                    android:textAllCaps="false"
-                    android:id="@+id/btn_retry" />
+                    android:text="@string/retry"
+                    android:textAllCaps="false" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <ProgressBar
                 android:id="@+id/pb_progressbar"
-                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
 
-        </RelativeLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

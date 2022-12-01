@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         tools:context=".view.details.DetailsFragment">
 
-        <com.google.android.material.card.MaterialCardView
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_16"
@@ -29,7 +29,7 @@
                 android:orientation="vertical">
 
 
-                <com.google.android.material.circularreveal.cardview.CircularRevealCardView
+                <androidx.cardview.widget.CardView
                     android:id="@+id/iv_pic_container"
                     android:layout_width="@dimen/image_size"
                     android:layout_height="@dimen/image_size"
@@ -45,7 +45,7 @@
                         android:layout_height="100dp"
                         app:srcCompat="@color/purple_500" />
 
-                </com.google.android.material.circularreveal.cardview.CircularRevealCardView>
+                </androidx.cardview.widget.CardView>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -93,8 +93,7 @@
 
             </androidx.appcompat.widget.LinearLayoutCompat>
 
-        </com.google.android.material.card.MaterialCardView>
-
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
