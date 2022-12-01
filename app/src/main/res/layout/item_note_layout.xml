@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.cardview.widget.CardView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_marginHorizontal="@dimen/margin_16"
     android:layout_marginVertical="@dimen/margin_8"
     app:cardCornerRadius="@dimen/margin_16"
@@ -18,8 +19,8 @@
             android:layout_width="@dimen/image_size"
             android:layout_height="@dimen/image_size"
             app:cardCornerRadius="@dimen/margin_8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_pic"
@@ -30,37 +31,40 @@
         </androidx.cardview.widget.CardView>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_16"
+            android:id="@+id/tv_title"
             android:text="@string/app_name"
+            android:layout_marginHorizontal="@dimen/margin_16"
             app:layout_constraintStart_toEndOf="@id/iv_pic_container"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/margin_16"
-            android:layout_marginTop="@dimen/margin_8"
+            android:text="@string/fake_price"
             app:layout_constraintStart_toEndOf="@id/iv_pic_container"
-            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+            app:layout_constraintTop_toBottomOf="@id/tv_title"
+            android:layout_marginHorizontal="@dimen/margin_16"
+            android:layout_marginTop="@dimen/margin_8"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="@string/fake_time"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/fake_date"
             android:layout_marginTop="@dimen/margin_8"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_time" />
+            app:layout_constraintTop_toBottomOf="@id/tv_time"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
