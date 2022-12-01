@@ -9,7 +9,7 @@
         android:id="@+id/FirstFragment"
         android:name="com.example.noteslistdemo.view.list.ListFragment"
         android:label="@string/first_fragment_label"
-        tools:layout="@layout/fragment_first">
+        tools:layout="@layout/fragment_list">
 
         <action
             android:id="@+id/action_ListFragment_to_DetailsFragment"
@@ -22,7 +22,7 @@
         android:id="@+id/SecondFragment"
         android:name="com.example.noteslistdemo.view.details.DetailsFragment"
         android:label="@string/second_fragment_label"
-        tools:layout="@layout/fragment_second">
+        tools:layout="@layout/fragment_details">
 
         <argument
             android:name="item"

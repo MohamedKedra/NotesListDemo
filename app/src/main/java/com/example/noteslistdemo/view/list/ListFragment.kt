@@ -9,19 +9,15 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.noteslistdemo.R
-import com.example.noteslistdemo.databinding.FragmentFirstBinding
+import com.example.noteslistdemo.databinding.FragmentListBinding
 import com.example.noteslistdemo.remote.ItemResult
 import com.example.noteslistdemo.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_first.*
-import kotlinx.android.synthetic.main.loading_notes_layout.*
 
 @AndroidEntryPoint
 class ListFragment : Fragment() {
 
-    private var _binding: FragmentFirstBinding? = null
-    private val binding get() = _binding!!
-
+    private lateinit var binding: FragmentListBinding
     private val listViewModel by viewModels<ListViewModel>()
     lateinit var adapter: NoteListAdapter
 
@@ -29,7 +25,7 @@ class ListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentFirstBinding.inflate(inflater, container, false)
+        binding = FragmentListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -56,7 +52,7 @@ class ListFragment : Fragment() {
                 DataState.DataStatus.SUCCESS -> {
                     showHideLoading()
                     adapter.submitList(it.getData()?.results as ArrayList<ItemResult>)
-                    rv_notes.adapter = adapter
+                    binding.rvNotes.adapter = adapter
                 }
                 DataState.DataStatus.ERROR -> {
                     showHideLoading(hasError = true, txt = it.getError()?.message.toString())
@@ -78,18 +74,11 @@ class ListFragment : Fragment() {
         txt: String = ""
     ) {
         with(binding) {
-            pb_progressbar.isVisible = isLoading
-            tv_error.isVisible = hasError
-            tv_error.text = txt
-            btn_retry.isVisible = hasError
-            btn_retry.setOnClickListener {
-                initObserver()
-            }
+            pbProgressbar.isVisible = isLoading
+            tvError.isVisible = hasError
+            tvError.text = txt
+            btnRetry.isVisible = hasError
+            btnRetry.setOnClickListener { initObserver() }
         }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
